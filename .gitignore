@@ -1,0 +1,8 @@
+*.pyc
+*~
+__pycache__
+/venv/
+.env
+docs.docx
+~$docs.docx
+db.sqlite3
