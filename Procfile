@@ -1,0 +1,1 @@
+web: gunicorn shelfy.wsgi --log-file -
