@@ -19,3 +19,51 @@ body
     font-size: 2rem;
     text-align: center;
 }
+
+#content
+{
+    border: 2px solid lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+a
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #f1fdf9;
+    text-decoration: none;
+    padding: .5rem;
+    text-align: center;
+    display: block;
+}
+
+button
+{
+    display: block;
+    background-color: #2C2A86;
+    border-radius: .5rem;
+    margin: 0 1rem 0 0;
+    float: right;
+    cursor: pointer;
+}
+
+#add_book
+{
+    width: 100%;
+}
+
+#search
+{
+    margin: 1rem;
+}
+
+#book_list
+{
+    margin: 2rem;
+}
+

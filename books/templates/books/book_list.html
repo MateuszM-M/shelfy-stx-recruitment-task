@@ -2,4 +2,44 @@
 
 {% block content %}
 
+
+    <div id="add_book">
+        <h5>
+            <button>
+                <a href="/">Add Book</a>
+            </button>
+        </h5>
+    </div>
+
+    <div id="search">
+        search fields
+    </div>
+
+    <div id="book_list">
+        <table id='book_table'>
+            <tr>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Published date</th>
+                <th>ISBN</th>
+                <th>Page count</th>
+                <th>Language</th>
+                <th>Cover</th>
+                <th>Edit</th>
+            </tr>
+                {% for book in books %}
+                    <tr>
+                        <td>{{book.title}}</td>
+                        <td>{{book.authors}}</td>
+                        <td>{{book.published_date}}</td>
+                        <td>{{book.isbn}}</td>
+                        <td>{{book.page_count}}</td>
+                        <td>{{book.language}}</td>
+                        <td>{{book.image_link}}</td>
+                        <td><button>Edit</button></td>
+                    </tr>
+                {% endfor %}
+        </table>
+    </div>
+
 {% endblock %}
