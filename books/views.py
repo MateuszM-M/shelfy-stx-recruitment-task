@@ -2,13 +2,20 @@ from django.contrib import messages
 from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 
+from .filters import BookFilter
 from .forms import BookForm
 from .models import Book
 
 
 def book_list(request):
     books = Book.active.all()
-    return render(request, 'books/book_list.html', {'books':books})
+    
+    book_filter = BookFilter(request.GET, queryset=books)
+    books = book_filter.qs
+    
+    context = {'books': books, 'book_filter': book_filter}
+    
+    return render(request, 'books/book_list.html', context)
 
 
 def add_book(request):

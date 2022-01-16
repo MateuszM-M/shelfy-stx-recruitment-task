@@ -12,7 +12,11 @@
     </div>
 
     <div id="search">
-        search fields
+        <form method="get">
+				{{book_filter.form}}
+
+		    <button id="search_btn" type="submit">Search</button>
+		  </form>
     </div>
 
     {% for message in messages %}

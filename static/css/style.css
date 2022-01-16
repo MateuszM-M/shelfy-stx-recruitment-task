@@ -103,3 +103,8 @@ button
 {
     background-color: rgb(170, 0, 0);
 }
+
+#search_btn
+{
+    background-color: #0059ff;
+}
