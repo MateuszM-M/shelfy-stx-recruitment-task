@@ -1,5 +1,6 @@
+from django.contrib import messages
 from django.forms import inlineformset_factory
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import BookForm
 from .models import Book
@@ -17,6 +18,9 @@ def add_book(request):
         form = BookForm(request.POST)
         if form.is_valid():
             form.save()
+            
+            messages.success(request, 'Book successfully added')
+            
             return redirect('book_list')
     
     context = {'form':form}
@@ -33,6 +37,9 @@ def edit_book(request, pk):
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
+            
+            messages.success(request, 'Book successfully updated')
+            
             return redirect('book_list')
     
     context = {'form':form}
@@ -45,6 +52,9 @@ def delete_book(request, pk):
     if request.method == 'POST':
         book.is_active=False
         book.save()
+        
+        messages.warning(request, 'Book successfully deleted')
+        
         return redirect('book_list')
     
     context = {'book':book}

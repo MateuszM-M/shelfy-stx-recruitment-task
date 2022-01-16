@@ -15,6 +15,10 @@
         search fields
     </div>
 
+    {% for message in messages %}
+        <p id="messages">{{message}}</p>
+    {% endfor %}
+
     <main>
         <div id="book_list">
             <table id='book_table'>
