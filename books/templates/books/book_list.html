@@ -41,8 +41,8 @@
                             <td>{{book.page_count}}</td>
                             <td>{{book.language}}</td>
                             <td><img src="{{book.image_link}}" alt=""></td>
-                            <td><button id='edit_btn'>Edit</button></td>
-                            <td><button id='remove_btn'>Remove</button></td>
+                            <td><button id='edit_btn'><a href="{% url 'edit_book' book.id %}">Edit</a></button></td>
+                            <td><button id='remove_btn'><a href="/">Remove</a></button></td>
                         </tr>
                     {% endfor %}
                 </tbody>
