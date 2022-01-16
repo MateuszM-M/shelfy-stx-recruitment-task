@@ -6,7 +6,7 @@ from .models import Book
 
 
 def book_list(request):
-    books = Book.objects.all()
+    books = Book.active.all()
     return render(request, 'books/book_list.html', {'books':books})
 
 
@@ -38,3 +38,15 @@ def edit_book(request, pk):
     context = {'form':form}
     
     return render(request, 'books/add_edit.html', context)
+
+def delete_book(request, pk):
+    book = get_object_or_404(Book, id=pk)
+    
+    if request.method == 'POST':
+        book.is_active=False
+        book.save()
+        return redirect('book_list')
+    
+    context = {'book':book}
+    
+    return render(request, 'books/delete_book.html', context)

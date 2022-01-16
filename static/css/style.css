@@ -59,7 +59,7 @@ button
 
 #edit_btn
 {
-    background-color: #ff5d28;
+    background-color: #286cff;
     margin: 0 0.3rem 0 0.3rem
 }
 
@@ -97,4 +97,9 @@ button
 
 .asteriskField {
     display: none;
+}
+
+#remove_btn
+{
+    background-color: rgb(170, 0, 0);
 }
