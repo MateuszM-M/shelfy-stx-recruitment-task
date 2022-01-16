@@ -29,13 +29,19 @@ SECRET_KEY = 'django-insecure-!r%viig&p($m9%f^=#&o16)%#t!qg1&@*iyn&jxo-ll3+ni0w*
 # Application definition
 
 INSTALLED_APPS = [
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # third party apps
     'storages',
+    'crispy_forms',
+    
+    # my apps
     'books.apps.BooksConfig',
 ]
 
@@ -116,3 +122,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Crispy forms
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
