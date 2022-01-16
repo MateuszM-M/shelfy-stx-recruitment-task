@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # third party apps
     'storages',
     'crispy_forms',
+    'isbn_field',
     
     # my apps
     'books.apps.BooksConfig',
