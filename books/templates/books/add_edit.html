@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div id="nav">
+        <h5>
+            <button id='nav_btn'>
+                <a href="/">Book list</a>
+            </button>
+        </h5>
+    </div>
+
+
+
+    <main>
+        <div id="book_add_container">
+            <form method='POST' action=''>
+            {% csrf_token %}
+            {{form|crispy}}
+            
+            <input type="submit" value='Save' id='submit_btn'>
+            </form>
+        </div>
+    </main>
+
+
+
+
+{% endblock %}
