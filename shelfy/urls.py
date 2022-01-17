@@ -16,8 +16,15 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+from books import api as book_api_views
+
+
+router = DefaultRouter()
+router.register(r'books', book_api_views.BookViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('books.urls'))
+    path('', include('books.urls')),
+    path('book-rest-api', include(router.urls))
 ]
