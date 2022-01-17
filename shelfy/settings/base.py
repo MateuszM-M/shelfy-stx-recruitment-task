@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'isbn_field',
     'django_filters',
+    'rest_framework',
     
     # my apps
     'books.apps.BooksConfig',
