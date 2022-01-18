@@ -10,11 +10,11 @@ class ActiveManager(models.Manager):
 class Book(models.Model):
     title = models.CharField(max_length=200)
     authors = models.CharField(max_length=200)
-    published_date = models.DateField()
-    isbn = ISBNField()
-    page_count = models.DecimalField(max_digits=5, decimal_places=0)
-    image_link = models.URLField(max_length=500)
-    language = models.CharField(max_length=2)
+    published_date = models.CharField(max_length=20, blank=True)
+    isbn = ISBNField(blank=True)
+    page_count = models.CharField(max_length=4, blank=True)
+    image_link = models.URLField(max_length=500, blank=True)
+    language = models.CharField(max_length=2, blank=True)
     is_active = models.BooleanField(default=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -27,3 +27,4 @@ class Book(models.Model):
         
     def __str__(self):
         return self.title
+

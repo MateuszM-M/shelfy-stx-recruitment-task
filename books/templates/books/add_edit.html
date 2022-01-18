@@ -19,10 +19,61 @@
             {% csrf_token %}
             {{form|crispy}}
             
-            <input type="submit" value='Save' id='submit_btn'>
+            <input type="submit" value='Save' id='submit_btn' name='add_book'>
             </form>
         </div>
     </main>
+
+    <form action="">
+    {{search_api_form|crispy}}
+    <input type="submit" value='Search' id='submit_btn' name='search_book'>
+    </form>
+
+
+    <div id="book_list">
+            <table id='book_table'>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Published date</th>
+                    <th>ISBN</th>
+                    <th>Page count</th>
+                    <th>Language</th>
+                    <th>Cover</th>
+                    <th>Import</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for lists in import_books %}
+                        {% for book in lists %}
+                            <tr>
+                                <td>{{book.title}}</td>
+                                <td>{{book.authors }}</td>
+                                <td>{{book.published_date}}</td>
+                                <td>{{book.isbn}}</td>
+                                <td>{{book.page_count}}</td>
+                                <td>{{book.language}}</td>
+                                <td><img src="{{book.image_link}}" alt=""></td>
+                                <td>
+                                    <form action="{% url 'import_book' %}" method='POST'>
+                                        {% csrf_token %}
+                                        <input type="hidden" name='title' value='{{ book.title }}'>
+                                        <input type="hidden" name='authors' value='{{ book.authors }}'>
+                                        <input type="hidden" name='published_date' value='{{ book.published_date }}'>
+                                        <input type="hidden" name='isbn' value='{{ book.isbn }}'>
+                                        <input type="hidden" name='page_count' value='{{ book.page_count }}'>
+                                        <input type="hidden" name='language' value='{{ book.language }}'>
+                                        <input type="hidden" name='image_link' value='{{ book.image_link }}'>
+                                        <input type="submit", value='Import' id='edit_btn'>
+                                    </form>        
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
 
 

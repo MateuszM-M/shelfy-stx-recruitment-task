@@ -4,8 +4,9 @@ from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import BookFilter
-from .forms import BookForm
+from .forms import BookForm, SearchApiForm
 from .models import Book
+from.import_api import search_api, render_to_table
 
 
 def book_list(request):
@@ -26,6 +27,8 @@ def book_list(request):
 
 def add_book(request):
     form = BookForm()
+    search_api_form = SearchApiForm()
+    import_books = {}
     
     if request.method == 'POST':
         form = BookForm(request.POST)
@@ -35,11 +38,34 @@ def add_book(request):
             messages.success(request, 'Book successfully added')
             
             return redirect('book_list')
-    
-    context = {'form':form}
+        
+    if request.method == 'GET' and 'search_book' in request.GET:
+        search_api_form = SearchApiForm(request.GET)
+        if search_api_form.is_valid():
+            queries = search_api_form.cleaned_data
+            search = search_api(queries=queries)
+            import_books = render_to_table(books=search)
+            print(import_books)
+            
+            
+    context = {'form':form, 'search_api_form':search_api_form,
+               'import_books': import_books}
     
     return render(request, 'books/add_edit.html', context)
 
+
+def import_book(request):
+    if request.method == 'POST':
+        book = Book.objects.create(
+            title=request.POST.get('title'),
+            authors=request.POST.get('authors'),
+            published_date=request.POST.get('published_date'),
+            isbn=request.POST.get('isbn'),
+            page_count=request.POST.get('page_count'),
+            image_link=request.POST.get('image_link'),
+            language=request.POST.get('language')
+        )
+        return redirect('book_list')
 
 def edit_book(request, pk):
     book = get_object_or_404(Book, id=pk)
