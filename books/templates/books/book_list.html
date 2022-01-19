@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -12,8 +13,8 @@
     </div>
 
     <div id="search">
-        <form method="get">
-				{{book_filter.form}}
+        <form method="get" class="uniForm">
+				{{book_filter.form|crispy}}
 
 		    <button id="search_btn" type="submit">Search</button>
 		  </form>
@@ -27,6 +28,7 @@
         <div id="book_list">
             <table id='book_table'>
                 <thead>
+                {% if page_obj %}
                 <tr>
                     <th>Title</th>
                     <th>Authors</th>
@@ -38,6 +40,9 @@
                     <th>Edit</th>
                     <th>Remove</th>
                 </tr>
+                {% else %}
+                    <p>No books added, yet.</p>
+                {% endif %}
                 </thead>
                 <tbody>
                     {% for book in page_obj %}

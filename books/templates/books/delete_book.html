@@ -14,7 +14,7 @@
 
 <form action="{% url 'delete_book' book.id %}" method="POST">
 {% csrf_token %}
-<input type="submit" name="Confirm" value='DELETE'>
+<input type="submit" name="Confirm" value='DELETE' id='delete_btn'>
 </form>
 
 

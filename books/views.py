@@ -71,7 +71,6 @@ def edit_book(request, pk):
     book = get_object_or_404(Book, id=pk)
     
     form = BookForm(instance=book)
-    
     if request.method == 'POST':
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
