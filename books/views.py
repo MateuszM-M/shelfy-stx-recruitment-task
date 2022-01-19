@@ -75,6 +75,7 @@ def import_book(request):
             image_link=request.POST.get('image_link'),
             language=request.POST.get('language')
         )
+        messages.success(request, 'Book successfully imported')
         return redirect('book_list')
 
 def edit_book(request, pk):
