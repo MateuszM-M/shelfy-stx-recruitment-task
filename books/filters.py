@@ -1,10 +1,15 @@
 import django_filters
-from django_filters import DateFilter, CharFilter
+from django_filters import CharFilter, DateFilter
 
 from .models import Book
 
 
 class BookFilter(django_filters.FilterSet):
+    """ 
+    Django filter used for filtering main table
+    in book list view
+    """
+    
     title = CharFilter(field_name='title', lookup_expr='icontains',
                        label='Title: ')
     authors = CharFilter(field_name='authors', lookup_expr='icontains',
