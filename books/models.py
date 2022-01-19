@@ -3,6 +3,8 @@ from isbn_field import ISBNField
 
 
 class ActiveManager(models.Manager):
+    """ Manager to easily query only books with is_active=true 
+    which are books that are not soft deleted"""
     def get_queryset(self):
         return super().get_queryset().filter(is_active=True)
 

@@ -4,6 +4,7 @@ from .models import Book
 
 
 class BookForm(forms.ModelForm):
+    """Form used to add books"""
     class Meta:
         model = Book
         fields = ['title', 'authors', 'published_date', 'isbn', 
@@ -11,6 +12,7 @@ class BookForm(forms.ModelForm):
 
 
 class SearchApiForm(forms.Form):
+    """Form used to query Google Books API"""
     q = forms.CharField(label='q', max_length=100, required=False)
     title = forms.CharField(label='title', max_length=100, required=False)
     author = forms.CharField(label='author', max_length=100, required=False)

@@ -6,10 +6,15 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .filters import BookFilter
 from .forms import BookForm, SearchApiForm
 from .models import Book
+
 from.import_api import search_api, render_to_table
 
 
 def book_list(request):
+    """Main page view with main table with books from database,
+    filters and pagination
+    """
+    
     books = Book.active.all()
     
     book_filter = BookFilter(request.GET, queryset=books)
@@ -26,6 +31,9 @@ def book_list(request):
 
 
 def add_book(request):
+    """Add book view with functionality of rendering Google
+    Books API to table and import to db
+    """
     form = BookForm()
     search_api_form = SearchApiForm()
     import_books = {}
@@ -45,7 +53,6 @@ def add_book(request):
             queries = search_api_form.cleaned_data
             search = search_api(queries=queries)
             import_books = render_to_table(books=search)
-            print(import_books)
             
             
     context = {'form':form, 'search_api_form':search_api_form,
@@ -55,6 +62,9 @@ def add_book(request):
 
 
 def import_book(request):
+    """View to import to database from
+    Google Book API results
+    """
     if request.method == 'POST':
         book = Book.objects.create(
             title=request.POST.get('title'),
@@ -85,6 +95,8 @@ def edit_book(request, pk):
     return render(request, 'books/add_edit.html', context)
 
 def delete_book(request, pk):
+    """ Soft delete view. Sets book is_active to false
+    """
     book = get_object_or_404(Book, id=pk)
     
     if request.method == 'POST':

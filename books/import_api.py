@@ -2,6 +2,9 @@ import requests
 
 
 def search_api(queries):
+    """
+    Function returns json from Google Books API
+    """
     clean_queries = {}
     for k, v in queries.items():           
         if v != '':
@@ -11,6 +14,8 @@ def search_api(queries):
     
     if 'q' in queries:
         url += f"q={queries['q']}"
+    else:
+        url += f"q="
     if 'title' in queries:
         url += f"+intitle:{queries['title']}"
     if 'author' in queries:
@@ -25,6 +30,16 @@ def search_api(queries):
 
 
 def render_to_table(books):
+    """
+    Gets search_api() returned json as parameter
+    Return list of dicts to render in table to provide
+    functionality to import to database.
+    
+    I guess that there have to be much more easy, elegant and DRY
+    solution to this but couldn't figure it out due to lack of time
+    so coded this ugly thing below.
+    """
+    
 
     books = books['items']
     import_books = []
@@ -49,7 +64,9 @@ def render_to_table(books):
                 published_date = {'published_date': None}
                 
             if volume['industryIdentifiers']:
-                isbn = {'isbn': volume['industryIdentifiers'][0]['identifier']}
+                isbn = {
+                    'isbn': volume['industryIdentifiers'][0]['identifier']
+                    }
             else:
                 isbn = {'isbn': None}
                 
@@ -60,7 +77,9 @@ def render_to_table(books):
             
             if 'imageLinks' in volume:
                 if 'thumbnail' in volume['imageLinks']:
-                    image_link = {'image_link': volume['imageLinks']['thumbnail']}
+                    image_link = {
+                        'image_link': volume['imageLinks']['thumbnail']
+                        }
                 else:
                     image_link = {'image_link': None}
             else:
@@ -73,7 +92,8 @@ def render_to_table(books):
             
                 
                 
-            import_book = [title|authors|published_date|isbn|page_count|image_link|language]
+            import_book = [title|authors|published_date|isbn|page_count|\
+                           image_link|language]
             
             import_books.append(import_book)
     return import_books
